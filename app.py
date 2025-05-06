@@ -5,7 +5,7 @@ st.title("🔍 ICI Professor Finder")
 
 query = st.text_input("Enter a research topic:")
 if st.button("Search") and query:
-    url = f"https://your-api.onrender.com/search?keyword={query}"  # ← Replace this with your actual API URL
+    url = f"https://ici-fastapi-backend.onrender.com//search?keyword={query}"  # ← Replace this with your actual API URL
     res = requests.get(url)
     if res.ok:
         results = res.json()
