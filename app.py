@@ -1,5 +1,5 @@
 # Backend URL
-BACKEND_URL = "https://backend-service.onrender.com/ask"  # Update with actual Render backend URL
+BACKEND_URL = "https://ici-fastapi-backend.onrender.com"  # Update with actual Render backend URL
 
 st.title("🔍 AI-Powered ICI Professor Finder")
 
