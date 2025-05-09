@@ -1,18 +1,23 @@
-import streamlit as st
-import requests
+# Backend URL
+BACKEND_URL = "https://backend-service.onrender.com/ask"  # Update with actual Render backend URL
 
-st.title("🔍 ICI Professor Finder")
+st.title("🔍 AI-Powered ICI Professor Finder")
 
-query = st.text_input("Enter a research topic:")
-if st.button("Search") and query:
-    url = f"https://ici-fastapi-backend.onrender.com//search?keyword={query}"  # ← Replace this with your actual API URL
-    res = requests.get(url)
-    if res.ok:
-        results = res.json()
-        for prof in results:
-            st.subheader(prof['name'])
-            st.image(prof['image_url'], width=200)
-            st.write(f"🎓 Education: {prof['education']}")
-            st.write(f"📚 Research Area: {prof['research_area']}")
+# Input question
+question = st.text_input("Enter your research topic:")
+
+if st.button("Submit"):
+    if question.strip():
+        with st.spinner("Getting your answer..."):
+            try:
+                response = requests.post(BACKEND_URL, json={"question": question})
+                if response.status_code == 200:
+                    data = response.json()
+                    st.success("Answer:")
+                    st.write(data.get("answer", "No answer found."))
+                else:
+                    st.error(f"Error: {response.status_code}")
+            except Exception as e:
+                st.error(f"An error occurred: {e}")
     else:
-        st.error("Failed to get results.")
+        st.warning("Please enter a question.")
